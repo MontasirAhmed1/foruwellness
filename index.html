@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF6F2">
+<title>for u</title>
+<style>
+:root{--bg:#FFF6F2;--surface:#FFFFFF;--ink:#4A3340;--mute:#8A7580;--line:#F2E2DE;--pink:#F4A9B8;--rose:#E8838F;--sage:#A8C3A0;--sageD:#6E9068;--amber:#F6B26B;--lav:#BFA8DE;--accent:#D9667A;--onaccent:#fff;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#241C22;--surface:#322730;--ink:#F8E9EC;--mute:#BCA7B0;--line:#443641;--accent:#F08FA2;--onaccent:#2A1C24;--sageD:#B7D2AF}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans);padding:env(safe-area-inset-top) 0 0}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.app{max-width:480px;margin:0 auto;padding:14px 16px calc(96px + env(safe-area-inset-bottom));position:relative;overflow:hidden}
+.deco{position:absolute;pointer-events:none;opacity:.55;z-index:0}
+.app>*{position:relative;z-index:1}
+.app>.deco{position:absolute}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logo{font:italic 600 32px var(--serif);display:flex;align-items:center;gap:6px;color:var(--accent)}
+.logo svg{width:30px;height:30px}
+.hi{margin:2px 0 10px;color:var(--mute)}
+.view{display:none}.view.on{display:block}
+.card{background:var(--surface);border-radius:24px;padding:18px;margin-top:14px;box-shadow:0 4px 18px rgba(217,102,122,.10)}
+.card h3{font-size:20px;margin-bottom:4px}
+.card p{margin:6px 0}
+.mute{color:var(--mute)}
+.hero{text-align:center;padding:10px 10px 18px}
+.flower{position:relative;width:min(88vw,330px);aspect-ratio:1;margin:0 auto}
+.flower svg{width:100%;height:100%;display:block}
+.fc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.fc b{font:600 52px/1 var(--serif)}
+.fc span{font-size:13px;color:var(--mute)}
+.badge{display:inline-block;padding:5px 14px;border-radius:99px;font-weight:600;font-size:14px;color:#3A2630}
+.next{margin:8px 0 0;color:var(--mute)}
+.row{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;border:0;border-radius:18px;padding:14px 10px;font-weight:700;background:var(--accent);color:var(--onaccent);min-height:52px}
+.btn.alt{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+.tip{display:flex;gap:12px;align-items:flex-start}
+.tip .em{font-size:30px;line-height:1}
+.tip b{display:block}
+.more{background:none;border:0;color:var(--accent);font-weight:700;padding:8px 0}
+.why{display:none;color:var(--mute);font-size:14px;margin-top:4px}.why.on{display:block}
+.flag{background:#FFE9E4;color:#5A2F2F}
+@media (prefers-color-scheme:dark){.flag{background:#4A2F35;color:#FFD9DD}}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--surface);box-shadow:0 -4px 18px rgba(217,102,122,.12);padding:6px 8px calc(6px + env(safe-area-inset-bottom));z-index:20;border-radius:22px 22px 0 0}
+nav div{max-width:480px;margin:0 auto;display:flex}
+nav button{flex:1;background:none;border:0;padding:6px 2px;border-radius:14px;color:var(--mute);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:54px}
+nav button i{font-style:normal;font-size:22px}
+nav button[aria-selected=true]{color:var(--accent);font-weight:700;background:color-mix(in srgb,var(--pink) 22%,transparent)}
+/* calendar */
+.mh{display:flex;align-items:center;justify-content:space-between}
+.mh h2{font-size:26px}
+.sq{width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);box-shadow:inset 0 0 0 2px var(--line);font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px}
+.dow{text-align:center;font-size:12px;color:var(--mute)}
+.cell{aspect-ratio:1;border:0;border-radius:50%;position:relative;font-size:14px;color:#3A2630;min-height:40px}
+.cell.today{box-shadow:0 0 0 3px var(--ink)}
+.cell.log::after{content:"";position:absolute;bottom:3px;left:50%;margin-left:-3px;width:6px;height:6px;border-radius:50%;background:#3A2630}
+.cell.fut{opacity:.55}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:13px;color:var(--mute)}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:0;background:var(--bg);box-shadow:inset 0 0 0 2px var(--line);border-radius:16px;padding:10px 14px;min-height:46px}
+.chip[aria-pressed=true]{background:color-mix(in srgb,var(--pink) 40%,var(--surface));box-shadow:inset 0 0 0 2px var(--accent);font-weight:700}
+.big .chip{font-size:26px;padding:6px 12px;min-width:54px}
+.scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.scroll .chip{white-space:nowrap}
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(40,20,30,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:520px;max-height:93vh;overflow-y:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:10px 18px calc(22px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .3s ease-out;z-index:31}
+.sheet.on{transform:none}
+.grab{width:44px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 12px}
+.sec{margin-top:18px}.sec>b{display:block;margin-bottom:8px}
+input[type=range]{width:100%;height:36px;accent-color:var(--accent)}
+input[type=text],input[type=date],textarea{width:100%;border:0;box-shadow:inset 0 0 0 2px var(--line);border-radius:16px;padding:12px;background:var(--surface);min-height:48px}
+.step{display:flex;align-items:center;gap:14px}
+.step b{font-size:22px;min-width:84px;text-align:center}
+.alert{display:none;margin-top:12px;padding:12px;border-radius:16px}.alert.on{display:block}
+.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translate(-50%,10px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:99px;opacity:0;transition:.25s;z-index:60;pointer-events:none;font-size:14px;text-align:center;max-width:90vw}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* welcome */
+.welcome{position:fixed;inset:0;background:var(--bg);z-index:50;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top)) 20px 30px}
+.welcome>div{max-width:420px;margin:0 auto;text-align:center}
+.welcome h1{font:italic 600 54px var(--serif);color:var(--accent)}
+.welcome .card{text-align:left}
+.welcome label{display:block;font-weight:700;margin:14px 0 6px}
+.hide{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="bloom" viewBox="0 0 100 100"><g fill="currentColor"><ellipse cx="50" cy="24" rx="14" ry="22"/><ellipse cx="50" cy="24" rx="14" ry="22" transform="rotate(72 50 50)"/><ellipse cx="50" cy="24" rx="14" ry="22" transform="rotate(144 50 50)"/><ellipse cx="50" cy="24" rx="14" ry="22" transform="rotate(216 50 50)"/><ellipse cx="50" cy="24" rx="14" ry="22" transform="rotate(288 50 50)"/></g><circle cx="50" cy="50" r="11" fill="#FFD98E"/></symbol>
+<symbol id="daisy" viewBox="0 0 100 100"><g fill="currentColor"><ellipse cx="50" cy="20" rx="7" ry="20"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(45 50 50)"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(90 50 50)"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(135 50 50)"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(180 50 50)"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(225 50 50)"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(270 50 50)"/><ellipse cx="50" cy="20" rx="7" ry="20" transform="rotate(315 50 50)"/></g><circle cx="50" cy="50" r="12" fill="#F6B26B"/></symbol>
+<symbol id="leaf" viewBox="0 0 100 100"><path d="M10 90C10 40 40 10 90 10 90 60 60 90 10 90Z" fill="currentColor"/><path d="M10 90L70 30" stroke="#fff" stroke-opacity=".5" stroke-width="3" fill="none"/></symbol>
+</defs></svg>
+
+<div class="welcome hide" id="welcome"><div>
+  <svg width="120" height="120" style="color:var(--pink)"><use href="#bloom"/></svg>
+  <h1>for u</h1>
+  <p class="mute">A calm little place to understand your cycle. Your info stays on this device.</p>
+  <div class="card">
+    <label for="wname">What should we call you?</label>
+    <input type="text" id="wname" placeholder="Your name" autocomplete="given-name">
+    <label for="wdate">When did your last period start?</label>
+    <input type="date" id="wdate">
+    <label>How long is your cycle, usually?</label>
+    <div class="step" style="justify-content:center"><button class="sq" data-w="-1" aria-label="Fewer days">−</button><b id="wlen">28 days</b><button class="sq" data-w="1" aria-label="More days">+</button></div>
+    <p class="mute" style="font-size:13px">Not sure? Leave it at 28. It adjusts as you track.</p>
+    <button class="btn" id="wgo" style="width:100%;margin-top:10px">Start</button>
+  </div>
+</div></div>
+
+<div class="app" id="app">
+  <svg class="deco" width="120" height="120" style="top:-30px;right:-34px;color:var(--pink)"><use href="#bloom"/></svg>
+  <svg class="deco" width="70" height="70" style="top:70px;right:-10px;color:var(--lav)"><use href="#daisy"/></svg>
+  <svg class="deco" width="60" height="60" style="top:40px;left:-20px;color:var(--sage);transform:rotate(-30deg)"><use href="#leaf"/></svg>
+
+  <div class="top"><div class="logo"><svg style="color:var(--pink)"><use href="#bloom"/></svg>for u</div></div>
+  <p class="hi" id="hi"></p>
+
+  <section class="view on" id="v-today">
+    <div class="card hero">
+      <div class="flower"><svg id="fl" viewBox="0 0 240 240" role="img" aria-label="Your cycle as a flower, one petal per day"></svg>
+        <div class="fc"><span id="fphase"></span><b id="fday"></b><span>day of cycle</span></div></div>
+      <span class="badge" id="badge"></span>
+      <p class="next" id="next"></p>
+    </div>
+    <div class="row"><button class="btn" id="logb">🌸 How do I feel?</button><button class="btn alt" id="perb">🩸 Period started</button></div>
+    <div class="card"><div class="tip"><div class="em" id="tem"></div><div><h3>Tip for today</h3><p id="ttxt"></p></div></div></div>
+    <div class="card"><h3 id="ititle"></h3><p id="ibody"></p>
+      <button class="more" id="whyb" aria-expanded="false">Why am I seeing this?</button><div class="why" id="why"></div></div>
+    <div class="card flag hide" id="flag"></div>
+  </section>
+
+  <section class="view" id="v-cal">
+    <div class="mh"><button class="sq" id="prev" aria-label="Previous month">‹</button><h2 id="mt"></h2><button class="sq" id="nxt" aria-label="Next month">›</button></div>
+    <div class="card"><div class="grid" id="grid"></div>
+      <div class="leg"><span><i style="background:var(--rose)"></i>Period</span><span><i style="background:var(--sage)"></i>Follicular</span><span><i style="background:var(--amber)"></i>Ovulation</span><span><i style="background:var(--lav)"></i>Luteal</span><span>● logged</span></div>
+      <p class="mute" style="font-size:13px;margin-bottom:0">Tap any day to add or edit how you felt. Future days are estimates.</p></div>
+    <div class="card"><h3>Your patterns</h3><p id="pat" class="mute"></p></div>
+  </section>
+
+  <section class="view" id="v-tips">
+    <h2 style="font-size:28px;margin-top:6px">Tips for you</h2>
+    <p class="mute" id="tsub"></p>
+    <div class="scroll" id="tcats"></div>
+    <div id="tlist"></div>
+    <p class="mute" style="font-size:13px;text-align:center;margin-top:18px">General wellness ideas, not medical advice.</p>
+  </section>
+
+  <section class="view" id="v-me">
+    <h2 style="font-size:28px;margin-top:6px">Me</h2>
+    <div class="card"><label for="mname"><b>Name</b></label><input type="text" id="mname" style="margin-top:6px">
+      <p style="margin-top:14px"><b>Cycle length</b></p>
+      <div class="step"><button class="sq" data-m="-1" aria-label="Fewer days">−</button><b id="mlen"></b><button class="sq" data-m="1" aria-label="More days">+</button></div>
+      <p style="margin-top:14px"><b>Last period started</b></p><input type="date" id="mdate">
+      <p class="mute" style="font-size:13px">Past periods you've tapped "Period started" for: <span id="hist"></span></p></div>
+    <div class="card"><h3>Your data</h3><p class="mute">Everything is saved only in this browser on this device. Nothing is uploaded.</p>
+      <div class="row"><button class="btn alt" id="exp">Download backup</button><button class="btn alt" id="del">Erase all</button></div></div>
+    <p class="mute" style="font-size:13px;text-align:center;margin-top:16px">for u shares education, not diagnosis. Predictions are estimates and are not contraception.</p>
+  </section>
+</div>
+
+<nav><div role="tablist">
+<button role="tab" aria-selected="true" data-v="today"><i>🌷</i>Today</button>
+<button role="tab" aria-selected="false" data-v="cal"><i>🗓️</i>Calendar</button>
+<button role="tab" aria-selected="false" data-v="tips"><i>🌿</i>Tips</button>
+<button role="tab" aria-selected="false" data-v="me"><i>🌼</i>Me</button></div></nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="stitle">
+  <div class="grab"></div>
+  <h2 id="stitle" style="font-size:26px"></h2><span class="badge" id="sbadge"></span>
+  <div class="sec"><b>How are you feeling?</b><div class="chips big" id="g-feel"></div></div>
+  <div class="sec"><b>Flow</b><div class="chips" id="g-flow"></div></div>
+  <div class="sec"><b>Any of these?</b><div class="chips" id="g-body"></div></div>
+  <div class="sec"><b>Mood</b><div class="chips" id="g-mood"></div></div>
+  <div class="sec"><b>Pain: <span id="pv">0</span> of 10</b><input type="range" id="pain" min="0" max="10" value="0" aria-label="Pain level"></div>
+  <div class="sec"><b>Sleep: <span id="sv">7</span> hours</b><input type="range" id="sleep" min="2" max="12" step="0.5" value="7" aria-label="Hours slept"></div>
+  <div class="sec"><b>Notes</b><textarea id="notes" placeholder="Anything else? (optional)" rows="2"></textarea></div>
+  <div class="alert flag" id="alert"></div>
+  <div class="row"><button class="btn alt" id="cancel">Not now</button><button class="btn" id="save">Save</button></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const KEY="foru_v1";
+let S={name:"",starts:[],len:28,logs:{},done:false};
+function load(){try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const iso=d=>{const z=new Date(d);return z.getFullYear()+"-"+String(z.getMonth()+1).padStart(2,"0")+"-"+String(z.getDate()).padStart(2,"0")};
+const at=s=>new Date(s+"T12:00");
+const today=()=>{const d=new Date();d.setHours(12,0,0,0);return d};
+const PH={M:{n:"Period",c:"var(--rose)",e:"🩸"},F:{n:"Follicular",c:"var(--sage)",e:"🌱"},O:{n:"Ovulation",c:"var(--amber)",e:"☀️"},L:{n:"Luteal",c:"var(--lav)",e:"🌙"}};
+const INS={
+M:["Your body is renewing itself","Estrogen and progesterone are at their lowest, so lower energy is normal. Your uterus releases prostaglandins, compounds that make its muscle contract and can cause cramps.","Hormone levels are lowest at the start of the cycle. Rest is productive now."],
+F:["Your energy is blooming","Estrogen is rising as a follicle matures. Many people feel more focused, social and energetic around now.","Rising estrogen is linked with better mood and energy. Everyone differs, so go by how you feel."],
+O:["Peak fertility window","A surge of LH (luteinizing hormone) triggers ovulation while estrogen peaks. You may notice clear, stretchy cervical fluid and a higher libido.","The LH surge releases an egg about a day later. This is an estimate and shouldn't be used alone as contraception."],
+L:["Slow down and be gentle","Progesterone leads this phase. A byproduct called allopregnanolone acts on GABA receptors, your brain's calming system, so mood can feel more sensitive. Resting metabolism rises a little, so extra hunger is normal.","Estrogen and progesterone both fall before your period, which can cause bloating, irritability and tiredness (PMS)."]};
+const TIPS={
+M:{Eat:["Pair iron-rich foods like lentils and spinach with vitamin C (a squeeze of lemon) to help absorption.","Warm, comforting foods such as soups and ginger tea feel good with cramps.","Magnesium-rich snacks like pumpkin seeds, dark chocolate or almonds may ease cramps for some people."],Move:["A slow walk or gentle yin yoga can ease tension.","A warm bath or heat pad on your lower belly relaxes the muscles.","Taking a full rest day is okay."],Rest:["Aim for an earlier bedtime. Your body is doing a lot of work.","Keep a water bottle nearby to support energy."],Mind:["Lower your to-do list today and choose two things that matter.","Journaling for 5 minutes can help you notice what you need."]},
+F:{Eat:["Add broccoli, kale or cabbage. Cruciferous veg supports healthy estrogen metabolism.","Try fermented foods like yogurt or kimchi for gut health.","Include protein with each meal to keep energy steady."],Move:["Energy tends to rise, so this is a good time for strength training or cardio.","Try a new class or route if you're feeling curious.","Always warm up and stop if something hurts."],Rest:["Keep a steady wake-up time to build good sleep habits.","Get daylight within an hour of waking to support your body clock."],Mind:["Focus is often sharper now, so plan creative or tricky tasks.","Reach out to a friend while you feel social."]},
+O:{Eat:["Colorful berries and leafy greens add antioxidants and fiber.","Stay hydrated, especially if you exercise hard.","Zinc-rich foods like chickpeas and seeds are a nice fit."],Move:["Higher intensity workouts often feel great now.","Include a good warm-up, as joints can feel looser mid-cycle."],Rest:["You may need a little less sleep, but don't skip it.","Wind down screens 30 minutes before bed."],Mind:["Confidence often peaks, so it's a good time for conversations that matter.","Notice your cervical fluid if you're tracking fertility."]},
+L:{Eat:["Pair complex carbs (sweet potato, oats, quinoa) with protein to steady blood sugar.","Bananas, chickpeas and salmon provide vitamin B6, linked to mood support.","Consider cutting back on caffeine and alcohol if you notice breast tenderness or anxiety."],Move:["Pilates, steady walking or lighter weights often feel better than intense sessions.","Gentle stretching can ease bloating and back tension."],Rest:["You may sleep lighter now. A cool, dark room helps.","Allow an extra 30 minutes in bed when you can."],Mind:["If you feel irritable or low, remember it's a hormone shift and it passes.","Say no to one thing this week."]}};
+const EMO={Eat:"🥗",Move:"🧘",Rest:"😴",Mind:"💭"};
+const O={feel:["😊","😌","😐","😔","😢","😤","🥵","🤒"],flow:["None","Spotting","Light","Medium","Heavy"],body:["Cramps","Bloating","Headache","Tender breasts","Acne","Back pain","Nausea","Tired"],mood:["Calm","Happy","Anxious","Irritable","Low","Foggy","Energized"]};
+
+function info(d){const st=[...S.starts].sort();if(!st.length)return{day:1,ph:"M"};let s=st[0];st.forEach(x=>{if(at(x)<=d)s=x});const n=Math.round((d-at(s))/864e5),L=S.len,day=((n%L)+L)%L+1,ov=L-14;
+  return{day,ph:day<=5?"M":day<ov-1?"F":day<=ov+1?"O":"L"}}
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2400)}
+function dayTip(ph){const all=Object.entries(TIPS[ph]).flatMap(([k,a])=>a.map(t=>[k,t]));const d=today();const i=(d.getFullYear()*372+d.getMonth()*31+d.getDate())%all.length;return all[i]}
+
+function render(){
+  const t=today(),{day,ph}=info(t),L=S.len;
+  $("#hi").textContent=(S.name?"Hi "+S.name+". ":"Hi. ")+"Here's your day.";
+  let s="";
+  for(let i=0;i<L;i++){const p=info(new Date(t.getTime()+(i+1-day)*864e5)).ph,cur=i+1==day,fut=i+1>day;
+    s+=`<ellipse cx="120" cy="${cur?42:50}" rx="${cur?10:Math.max(5,Math.min(8,380/L/2))}" ry="${cur?30:24}" fill="${PH[p].c}" opacity="${fut?.5:1}" ${cur?'stroke="var(--ink)" stroke-width="2.5"':""} transform="rotate(${i/L*360} 120 120)"/>`}
+  s+='<circle cx="120" cy="120" r="46" fill="var(--surface)"/>';
+  $("#fl").innerHTML=s;
+  $("#fday").textContent=day;$("#fphase").textContent=PH[ph].e;
+  const b=$("#badge");b.textContent=PH[ph].n+" phase";b.style.background=PH[ph].c;
+  const toP=L-day+1;$("#next").textContent=toP<=1?"Your period may start tomorrow.":"Next period in about "+toP+" days.";
+  const [k,tx]=dayTip(ph);$("#tem").textContent=EMO[k];$("#ttxt").textContent=tx;
+  $("#ititle").textContent=INS[ph][0];$("#ibody").textContent=INS[ph][1];$("#why").textContent=INS[ph][2];
+  const f=flags(),fc=$("#flag");fc.classList.toggle("hide",!f.length);fc.innerHTML=f.length?"<h3>Worth chatting with a clinician</h3>"+f.map(x=>"<p>"+x+"</p>").join(""):"";
+  $("#mname").value=S.name;$("#mlen").textContent=L+" days";$("#mdate").value=[...S.starts].sort().pop()||"";
+  $("#hist").textContent=[...S.starts].sort().slice(-4).map(x=>at(x).toLocaleDateString("en",{month:"short",day:"numeric"})).join(", ")||"none yet";
+  renderCal();renderTips();
+}
+function flags(){const o=[],ks=Object.keys(S.logs).sort();if(S.len<21||S.len>35)o.push("Your cycle length ("+S.len+" days) is outside the usual 21 to 35 days.");
+  let run=0,mx=0,pv=null;ks.forEach(k=>{const h=["Light","Medium","Heavy"].includes(S.logs[k].flow),d=at(k);run=h?(pv&&(d-pv)/864e5==1?run+1:1):0;pv=d;mx=Math.max(mx,run)});
+  if(mx>7)o.push("You logged bleeding for more than 7 days in a row.");
+  if(ks.some(k=>S.logs[k].pain>=8))o.push("You logged severe pain. Pain that stops daily life deserves a check-up.");
+  const g=[...S.starts].sort().slice(-3);if(g.length==3&&Math.abs((at(g[2])-at(g[1]))/864e5-(at(g[1])-at(g[0]))/864e5)>9)o.push("Your last cycles varied by more than 9 days.");return o}
+
+let cm=new Date(today().getFullYear(),today().getMonth(),1);
+function renderCal(){
+  $("#mt").textContent=cm.toLocaleDateString("en",{month:"long",year:"numeric"});
+  let h="SMTWTFS".split("").map(x=>`<div class="dow">${x}</div>`).join("");
+  const n=new Date(cm.getFullYear(),cm.getMonth()+1,0).getDate(),td=today();
+  for(let i=0;i<cm.getDay();i++)h+="<div></div>";
+  for(let d=1;d<=n;d++){const dt=new Date(cm.getFullYear(),cm.getMonth(),d,12),k=iso(dt),p=info(dt).ph;
+    h+=`<button class="cell${k==iso(td)?" today":""}${S.logs[k]?" log":""}${dt>td?" fut":""}" style="background:${PH[p].c}" data-d="${k}" aria-label="${dt.toDateString()}, ${PH[p].n}">${d}</button>`}
+  $("#grid").innerHTML=h;
+  $$(".cell").forEach(c=>c.onclick=()=>openSheet(c.dataset.d));
+  const ks=Object.keys(S.logs);
+  if(ks.length<3){$("#pat").textContent="Log a few days and your patterns will bloom here."}else{const c={};ks.forEach(k=>[...(S.logs[k].mood||[]),...(S.logs[k].body||[])].forEach(x=>c[x]=(c[x]||0)+1));
+    const top=Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0].toLowerCase()+" ("+x[1]+")");const sl=ks.map(k=>+S.logs[k].sleep).filter(Boolean);
+    $("#pat").textContent=(top.length?"Most logged: "+top.join(", ")+". ":"")+(sl.length?"Average sleep: "+(sl.reduce((a,b)=>a+b)/sl.length).toFixed(1)+" hours.":"")}
+}
+let cat="Eat";
+function renderTips(){const ph=info(today()).ph;$("#tsub").textContent="Picked for your "+PH[ph].n.toLowerCase()+" phase.";
+  $("#tcats").innerHTML="";Object.keys(EMO).forEach(c=>{const b=document.createElement("button");b.className="chip";b.textContent=EMO[c]+" "+c;b.setAttribute("aria-pressed",c==cat);b.onclick=()=>{cat=c;renderTips()};$("#tcats").appendChild(b)});
+  $("#tlist").innerHTML=TIPS[ph][cat].map(t=>`<div class="card"><div class="tip"><div class="em">${EMO[cat]}</div><p style="margin:0">${t}</p></div></div>`).join("")}
+
+let cur={},curD="";
+function chips(id,arr,multi,key){const el=$(id);el.innerHTML="";arr.forEach(v=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=v;
+  const on=()=>multi?(cur[key]||[]).includes(v):cur[key]===v;b.setAttribute("aria-pressed",on());
+  b.onclick=()=>{if(multi){const a=cur[key]=cur[key]||[],i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)}else cur[key]=on()?null:v;if(navigator.vibrate)navigator.vibrate(8);chips(id,arr,multi,key)};el.appendChild(b)})}
+function openSheet(k){curD=k||iso(today());const d=at(curD),{day,ph}=info(d);cur=JSON.parse(JSON.stringify(S.logs[curD]||{}));
+  $("#stitle").textContent=curD==iso(today())?"Today":d.toLocaleDateString("en",{weekday:"long",month:"short",day:"numeric"});
+  const b=$("#sbadge");b.textContent=PH[ph].n+", day "+day;b.style.background=PH[ph].c;
+  chips("#g-feel",O.feel,false,"feel");chips("#g-flow",O.flow,false,"flow");chips("#g-body",O.body,true,"body");chips("#g-mood",O.mood,true,"mood");
+  $("#pain").value=cur.pain||0;$("#pv").textContent=cur.pain||0;$("#sleep").value=cur.sleep||7;$("#sv").textContent=cur.sleep||7;$("#notes").value=cur.notes||"";$("#alert").classList.toggle("on",(cur.pain||0)>=8);
+  $("#scrim").classList.add("on");$("#sheet").classList.add("on");$("#sheet").scrollTop=0}
+function closeSheet(){$("#scrim").classList.remove("on");$("#sheet").classList.remove("on")}
+$("#pain").oninput=e=>{$("#pv").textContent=e.target.value;const a=$("#alert");a.textContent="Pain this strong deserves attention. Please consider talking with a healthcare provider.";a.classList.toggle("on",+e.target.value>=8)};
+$("#sleep").oninput=e=>$("#sv").textContent=e.target.value;
+$("#save").onclick=()=>{cur.pain=+$("#pain").value;cur.sleep=+$("#sleep").value;cur.notes=$("#notes").value.trim();
+  if(cur.flow&&cur.flow!="None"&&cur.flow!="Spotting"&&!S.starts.some(s=>Math.abs((at(s)-at(curD))/864e5)<=7)){S.starts.push(curD)}
+  S.logs[curD]=cur;save();closeSheet();render();toast("Saved 🌸 Thanks for checking in")};
+$("#logb").onclick=()=>openSheet();$("#cancel").onclick=closeSheet;$("#scrim").onclick=closeSheet;
+document.addEventListener("keydown",e=>{if(e.key=="Escape")closeSheet()});
+$("#perb").onclick=()=>{const k=iso(today());if(!S.starts.includes(k))S.starts.push(k);S.starts.sort();recalc();save();render();toast("Got it. A new cycle begins today 🌷")};
+function recalc(){const g=[...S.starts].sort().slice(-6);if(g.length>=3){const d=[];for(let i=1;i<g.length;i++)d.push(Math.round((at(g[i])-at(g[i-1]))/864e5));const ok=d.filter(x=>x>=15&&x<=60);if(ok.length)S.len=Math.round(ok.reduce((a,b)=>a+b)/ok.length)}}
+$$("nav button").forEach(b=>b.onclick=()=>{$$("nav button").forEach(x=>x.setAttribute("aria-selected",x==b));$$(".view").forEach(v=>v.classList.toggle("on",v.id=="v-"+b.dataset.v));scrollTo(0,0)});
+$("#whyb").onclick=e=>{const o=$("#why").classList.toggle("on");e.currentTarget.setAttribute("aria-expanded",o)};
+$("#prev").onclick=()=>{cm=new Date(cm.getFullYear(),cm.getMonth()-1,1);renderCal()};
+$("#nxt").onclick=()=>{cm=new Date(cm.getFullYear(),cm.getMonth()+1,1);renderCal()};
+$("#mname").onchange=e=>{S.name=e.target.value.trim();save();render()};
+$$("[data-m]").forEach(b=>b.onclick=()=>{S.len=Math.max(15,Math.min(60,S.len+ +b.dataset.m));save();render()});
+$("#mdate").onchange=e=>{if(e.target.value){const l=[...S.starts].sort();l.pop();S.starts=[...l,e.target.value].sort();save();render();toast("Updated")}};
+$("#exp").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(S,null,2)],{type:"application/json"}));a.download="for-u-backup.json";a.click();toast("Backup downloaded")};
+$("#del").onclick=()=>{if(confirm("Erase everything saved on this device?")){try{localStorage.removeItem(KEY)}catch(e){}S={name:"",starts:[],len:28,logs:{},done:false};showWelcome()}};
+// welcome
+let wl=28;
+function showWelcome(){const d=today();d.setDate(d.getDate()-13);$("#wdate").value=iso(d);$("#wname").value=S.name||"";wl=S.len||28;$("#wlen").textContent=wl+" days";$("#welcome").classList.remove("hide");$("#app").classList.add("hide");$("nav").classList.add("hide")}
+$$("[data-w]").forEach(b=>b.onclick=()=>{wl=Math.max(15,Math.min(60,wl+ +b.dataset.w));$("#wlen").textContent=wl+" days"});
+$("#wgo").onclick=()=>{S.name=$("#wname").value.trim();S.starts=[$("#wdate").value||iso(today())];S.len=wl;S.done=true;save();$("#welcome").classList.add("hide");$("#app").classList.remove("hide");$("nav").classList.remove("hide");render()};
+load();
+if(S.done&&S.starts.length){render()}else{showWelcome()}
+</script>
+</body>
+</html>
