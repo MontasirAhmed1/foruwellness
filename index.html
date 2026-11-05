@@ -26,7 +26,7 @@
   </div>
 
   <div id="app" class="app-shell hidden">
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <a class="brand" href="#" data-page="home">for u <span>🌻</span></a>
       <p class="side-tagline">a little space for you</p>
       <nav class="side-nav" aria-label="Main navigation">
@@ -43,11 +43,11 @@
         <p class="tiny muted">Made with a little extra love ♡</p>
       </div>
     </aside>
-    <button id="menuBackdrop" class="menu-backdrop" type="button" aria-label="Close navigation menu" tabindex="-1"></button>
 
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
     <main class="main-content">
       <header class="topbar">
-        <button id="mobileMenu" class="icon-btn mobile-menu" aria-label="Open navigation menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <button id="mobileMenu" class="icon-btn mobile-menu" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
         <div>
           <p class="eyebrow" id="todayLabel">YOUR LITTLE WELLNESS SPACE</p>
           <div class="top-title" id="pageHeading">Home</div>
@@ -223,7 +223,7 @@
       <button data-page="cycle"><span>◷</span><small>Cycle</small></button>
       <button data-page="journal"><span>♡</span><small>Journal</small></button>
       <button data-page="mood"><span>☻</span><small>Mood</small></button>
-      <button id="mobileMore" type="button" aria-label="Open all sections"><span>☰</span><small>More</small></button>
+      <button data-page="settings"><span>⚙</span><small>More</small></button>
     </nav>
   </div>
 
