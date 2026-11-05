@@ -1662,4 +1662,14 @@ body.dark .water-progress {
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
+/* =========================================
+   26. SPACING BETWEEN GRID AND FOLLOWING CARDS
+========================================= */
+
+#page-cycle > .grid-two + .card,
+#page-wellness > .grid-two + .card,
+#page-settings > .grid-two + .card {
+    margin-top: 18px;
+}
+
 }
