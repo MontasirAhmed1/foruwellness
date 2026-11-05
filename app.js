@@ -84,14 +84,17 @@
   }
   function setupEvents(){
     document.addEventListener("click",e=>{
-      const pageBtn=e.target.closest("[data-page]");if(pageBtn){e.preventDefault();navigate(pageBtn.dataset.page);$("sidebar")?.classList.remove("open");}
+      const pageBtn=e.target.closest("[data-page]");if(pageBtn){e.preventDefault();navigate(pageBtn.dataset.page);closeMobileMenu();}
       const sym=e.target.closest("[data-symptom]");if(sym){const s=sym.dataset.symptom;selectedSymptoms.has(s)?selectedSymptoms.delete(s):selectedSymptoms.add(s);sym.classList.toggle("selected");}
       const fac=e.target.closest("[data-factor]");if(fac){const s=fac.dataset.factor;selectedFactors.has(s)?selectedFactors.delete(s):selectedFactors.add(s);fac.classList.toggle("selected");}
       const mood=e.target.closest("[data-mood]");if(mood){selectedMood=mood.dataset.mood;document.querySelectorAll(".mood-option").forEach(x=>x.classList.toggle("selected",x.dataset.mood===selectedMood));}
       const del=e.target.closest("[data-delete]");if(del)deleteEntry(del.dataset.kind,del.dataset.id);
       const article=e.target.closest("[data-article]");if(article)openArticle(Number(article.dataset.article));
     });
-    $("mobileMenu").addEventListener("click",()=>navigate("settings"));
+    $("mobileMenu").addEventListener("click",toggleMobileMenu);
+    $("mobileMore").addEventListener("click",toggleMobileMenu);
+    $("menuBackdrop").addEventListener("click",closeMobileMenu);
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMobileMenu();});
     $("unlockForm").addEventListener("submit",async e=>{e.preventDefault();const stored=await dbGet();const opened=await decodeStored(stored,$("pinInput").value);if(opened){data=opened;showApp();}else $("lockError").textContent="That PIN didn't match. Please try again.";});
     $("periodForm").addEventListener("submit",async e=>{e.preventDefault();const start=$("periodStart").value,end=$("periodEnd").value;if(end&&end<start){toast("The end date must be after the start date.");return;}const existing=data.periods.find(p=>p.start===start);if(existing){existing.end=end||existing.end;existing.flow=$("periodFlow").value;}else data.periods.push({id:uid(),start,end,flow:$("periodFlow").value});data.periods.sort((a,b)=>a.start.localeCompare(b.start));await save();renderAll();toast("Period dates saved 💗");});
     $("cycleSettingsForm").addEventListener("submit",async e=>{e.preventDefault();data.profile.cycleLength=clamp(+$("cycleLength").value,15,60);data.profile.periodLength=clamp(+$("periodLength").value,1,15);data.profile.reminderDays=clamp(+$("reminderDays").value,0,7);await save();renderAll();toast("Cycle preferences saved.");});
@@ -126,6 +129,21 @@
   }
   function uid(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2);}
   function clamp(n,min,max){return Math.min(max,Math.max(min,n||min));}
+  function toggleMobileMenu(){
+    const open=!$("sidebar").classList.contains("open");
+    $("sidebar").classList.toggle("open",open);
+    $("menuBackdrop").classList.toggle("visible",open);
+    document.body.classList.toggle("menu-open",open);
+    $("mobileMenu").setAttribute("aria-expanded",String(open));
+    $("mobileMenu").setAttribute("aria-label",open?"Close navigation menu":"Open navigation menu");
+  }
+  function closeMobileMenu(){
+    $("sidebar")?.classList.remove("open");
+    $("menuBackdrop")?.classList.remove("visible");
+    document.body.classList.remove("menu-open");
+    $("mobileMenu")?.setAttribute("aria-expanded","false");
+    $("mobileMenu")?.setAttribute("aria-label","Open navigation menu");
+  }
   function navigate(name){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+name));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===name));const titles={home:"Home",cycle:"My cycle",journal:"My journal",mood:"My mood",selfcare:"Self-care",wellness:"Wellness",learn:"Learn",settings:"Settings & privacy"};$("pageHeading").textContent=titles[name]||"FOR U";window.scrollTo({top:0,behavior:"smooth"});if(name==="cycle")renderCycle();if(name==="journal")renderJournal();if(name==="mood")renderMood();if(name==="selfcare")renderCare();if(name==="wellness"){renderWater();renderActivities();}if(name==="learn")renderArticles();}
   function latestPeriod(){return [...data.periods].sort((a,b)=>b.start.localeCompare(a.start))[0]||null;}
   function cycleInfo(){
@@ -202,12 +220,19 @@
     try{const reg=await navigator.serviceWorker?.ready;if(reg)await reg.showNotification("A gentle FOR U reminder 🌻",{body:`Your period may start in about ${lead} day${lead===1?"":"s"}. Be kind to yourself.`,icon:"./sunflower.svg",badge:"./sunflower.svg",tag:"for-u-period-"+key,data:{url:"./"}});else new Notification("A gentle FOR U reminder 🌻",{body:`Your period may start in about ${lead} days.`});data.notification.lastReminder=key;await save();}catch(e){console.warn("Notification failed",e);}
   }
   async function exportBackup(){
+    if(data.profile.pin && !confirm("Your backup file will contain readable personal entries and will not be PIN-encrypted. Save it somewhere private. Continue?"))return;
     const payload={app:"FOR U",version:1,exportedAt:new Date().toISOString(),data};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="for-u-backup-"+todayISO()+".json";a.click();URL.revokeObjectURL(url);toast("Your backup is ready.");
   }
   async function importBackup(e){
     const file=e.target.files?.[0];if(!file)return;
-    try{const parsed=JSON.parse(await file.text());if(parsed.app!=="FOR U"||!parsed.data||!parsed.data.profile)throw Error("Invalid backup");if(!confirm("Restore this backup? Your current data will be replaced."))return;data=parsed.data;encryptionKey=null;if(data.profile.pin){delete data.profile.pin;}await save();renderAll();toast("Backup restored. Set a new PIN if you want to lock this device.");}catch(err){toast("That file doesn't look like a valid FOR U backup.");}finally{e.target.value="";}
+    try{
+      const parsed=JSON.parse(await file.text()),incoming=parsed?.data;
+      if(parsed.app!=="FOR U"||!incoming||typeof incoming!=="object"||!incoming.profile||!Array.isArray(incoming.periods)||!incoming.daily||!Array.isArray(incoming.journals))throw Error("Invalid backup");
+      if(!confirm("Restore this backup? It will replace the data currently stored in this browser. Any PIN from the backup will not be restored, so you can set a new device PIN afterward."))return;
+      data={...defaultData(),...incoming,profile:{...defaultData().profile,...incoming.profile}};
+      encryptionKey=null;delete data.profile.pin;await save();renderAll();toast("Backup restored. Set a new PIN if you want to lock this device.");
+    }catch(err){toast("That file doesn't look like a valid FOR U backup.");}finally{e.target.value="";}
   }
   function openPinDialog(){
     $("pinDialogTitle").textContent=data.profile.pin?"Change your PIN":"Set a PIN";

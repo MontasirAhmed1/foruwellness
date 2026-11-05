@@ -4,3 +4,44 @@
 @media(max-width:900px){.sidebar{width:210px}.main-content{margin-left:210px;padding:25px 24px}.article-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){body{font-size:14px}.sidebar{display:none}.main-content{margin:0;padding:18px 16px 100px}.topbar{margin-bottom:24px;padding-bottom:14px}.mobile-menu{display:grid}.topbar>div{margin-right:auto;margin-left:12px}.top-title{font-size:20px}.welcome-row{align-items:flex-start;flex-direction:column}.welcome-row h1{font-size:32px}.date-pill{font-size:11px}.hero-grid,.grid-two{grid-template-columns:1fr;gap:12px}.card{padding:19px;border-radius:19px}.hero-number{font-size:45px}.section-heading{margin-top:25px}.stats-grid{gap:9px}.stat-card{padding:13px}.cycle-summary{grid-template-columns:1fr 1fr}.summary-number{font-size:38px}.summary-number.small{font-size:25px}.calendar-cell{min-height:39px;font-size:11px;border-radius:9px}.calendar-grid{gap:4px}.mood-options{gap:5px}.mood-option{padding:10px 2px}.mood-option .emoji{font-size:22px}.mood-option small{font-size:9px}.mood-history{grid-template-columns:1fr}.article-grid{grid-template-columns:1fr}.library-tools{grid-template-columns:1fr}.mobile-nav{position:fixed;display:flex;bottom:0;left:0;right:0;z-index:20;background:#fff;border-top:1px solid var(--line);padding:8px 5px calc(8px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -5px 20px #56416d0c}.mobile-nav button{border:0;background:transparent;color:#9b8da6;display:grid;justify-items:center;gap:2px;min-width:52px;padding:3px}.mobile-nav button span{font-size:20px}.mobile-nav button small{font-size:9px}.mobile-nav button.active{color:var(--purple-dark);font-weight:700}.footer{padding-bottom:15px}.modal-card{padding:24px 20px}.reminder-card{padding:17px}.lock-card{padding:28px 22px}}
 body.dark{--bg:#211c29;--surface:#2d2636;--surface2:#392e46;--lav:#493a57;--lav2:#665078;--purple:#c2a5dc;--purple-dark:#e0ccec;--text:#eee6f3;--muted:#b6a9c0;--line:#45394f;--pink:#493542;--shadow:0 10px 32px #0002}body.dark .sidebar{background:#2b2333}body.dark .nav-item{color:#c1b3cc}body.dark .nav-item.active,body.dark .nav-item:hover,body.dark .card,body.dark .article-card,body.dark .modal-card,body.dark .lock-card{background:var(--surface)}body.dark input,body.dark select,body.dark textarea,body.dark .avatar,body.dark .icon-btn,body.dark .history-item,body.dark .journal-item,body.dark .mood-record,body.dark .check-row,body.dark .calendar-cell,body.dark .mobile-nav{background:#352c40;color:var(--text);border-color:var(--line)}body.dark .calendar-cell.weekday,body.dark .calendar-cell.empty{background:transparent}body.dark .cycle-hero{background:linear-gradient(135deg,#44344f,#3c3048)}body.dark .mood-hero{background:linear-gradient(135deg,#4b3546,#40313e)}body.dark .cycle-hero .muted,body.dark .mood-hero .muted{color:#c5b5cc}body.dark .btn.light,body.dark .btn.outline{background:#3a3044;color:#e4d5ef;border-color:#685477}body.dark .btn.primary{background:#9276b2;color:#fff}body.dark .period{background:#62465f!important;color:#f4dff0!important}body.dark .predicted{background:#493849!important;color:#e3c6df!important}
+
+/* Mobile navigation drawer: keeps every section reachable on small screens. */
+.menu-backdrop{display:none}
+@media(max-width:650px){
+  .sidebar{
+    display:flex;
+    position:fixed;
+    inset:0 auto 0 0;
+    width:min(84vw,310px);
+    height:100dvh;
+    padding:calc(24px + env(safe-area-inset-top)) 18px calc(20px + env(safe-area-inset-bottom));
+    overflow-y:auto;
+    transform:translateX(-105%);
+    transition:transform .25s ease;
+    z-index:41;
+    box-shadow:12px 0 35px rgba(55,38,72,.12);
+  }
+  .sidebar.open{transform:translateX(0)}
+  .side-tagline{margin-bottom:24px}
+  .side-nav{gap:5px}
+  .nav-item{padding:13px 14px;min-height:46px}
+  .sidebar-bottom{padding-top:20px}
+  .menu-backdrop{
+    display:block;
+    position:fixed;
+    inset:0;
+    z-index:40;
+    border:0;
+    padding:0;
+    background:rgba(35,25,45,.38);
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .25s ease,visibility .25s ease;
+  }
+  .menu-backdrop.visible{opacity:1;visibility:visible}
+  .mobile-menu{position:relative;z-index:42;flex:0 0 40px}
+  .mobile-nav{z-index:30}
+  body.menu-open{overflow:hidden}
+  .mobile-nav button{flex:1}
+  .mobile-nav button:focus-visible,.mobile-menu:focus-visible,.nav-item:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+}
