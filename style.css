@@ -1,3 +1,1570 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+/* =========================================
+   1. VARIABLES AND RESET
+========================================= */
+
+:root {
+    --bg: #faf8fc;
+    --surface: #fff;
+    --surface2: #f5effa;
+    --lav: #e9def3;
+    --lav2: #d9c8e9;
+    --purple: #8d70ad;
+    --purple-dark: #695181;
+    --text: #51465d;
+    --muted: #92879b;
+    --line: #eee7f2;
+    --pink: #f4e5ed;
+    --green: #e8f0e7;
+    --danger: #b65c73;
+    --shadow: 0 10px 32px rgba(91, 67, 113, .07);
+    --radius: 22px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.app-shell {
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. DESKTOP SIDEBAR
+========================================= */
+
+.sidebar {
+    width: 245px;
+    position: fixed;
+    inset: 0 auto 0 0;
+    background: #f3edf8;
+    padding: 32px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    color: var(--purple-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.brand span {
+    font-family: sans-serif;
+    font-size: 24px;
+}
+
+.side-tagline {
+    margin: 0 0 34px 3px;
+    color: #9b8da7;
+    font-size: 12px;
+    letter-spacing: .4px;
+}
+
+.side-nav {
+    display: grid;
+    gap: 7px;
+}
+
+.nav-item {
+    border: 0;
+    background: transparent;
+    color: #796b87;
+    padding: 12px 14px;
+    border-radius: 13px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.nav-item span {
+    font-size: 20px;
+    width: 23px;
+    text-align: center;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #fff;
+    color: var(--purple-dark);
+    box-shadow: 0 5px 15px #72568c12;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.tiny {
+    font-size: 11px;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* =========================================
+   3. MAIN CONTENT AND TOPBAR
+========================================= */
+
+.main-content {
+    margin-left: 245px;
+    max-width: 1500px;
+    padding: 30px clamp(22px, 4vw, 62px) 40px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 18px;
+    margin-bottom: 34px;
+}
+
+.avatar,
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--purple);
+    font-size: 20px;
+    display: grid;
+    place-items: center;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+.page {
+    display: none;
+    animation: fade .25s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fade {
+    from {
+        opacity: .3;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* =========================================
+   4. TYPOGRAPHY
+========================================= */
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    letter-spacing: -.5px;
+    color: var(--text);
+}
+
+h1 {
+    font-size: clamp(30px, 4vw, 42px);
+    line-height: 1.15;
+    margin-bottom: 9px;
+}
+
+h2 {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.65px;
+    font-weight: 700;
+    color: #a18eae;
+    margin: 0 0 5px;
+}
+
+.top-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    color: var(--purple-dark);
+}
+
+/* =========================================
+   5. HOME PAGE
+========================================= */
+
+.welcome-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 15px;
+    margin-bottom: 26px;
+}
+
+.welcome-row h1 span {
+    font-family: sans-serif;
+    font-size: 27px;
+}
+
+.date-pill {
+    background: var(--surface2);
+    padding: 9px 14px;
+    border-radius: 30px;
+    color: var(--purple-dark);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+}
+
+.cycle-hero {
+    background: linear-gradient(135deg, #e7dcf1, #f3eaf7);
+    border: 0;
+}
+
+.mood-hero {
+    background: linear-gradient(135deg, #f7eaf0, #fbf1f2);
+    border: 0;
+}
+
+.card-topline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-bubble {
+    width: 33px;
+    height: 33px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #ffffffa8;
+    color: var(--purple);
+    font-size: 19px;
+}
+
+.hero-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    line-height: 1.1;
+    margin: 23px 0 0;
+    color: var(--purple-dark);
+}
+
+.cycle-hero h2,
+.mood-hero h2 {
+    margin: 0 0 6px;
+}
+
+.cycle-hero .muted,
+.mood-hero .muted {
+    font-size: 13px;
+}
+
+.mood-face {
+    font-size: 47px;
+    margin: 18px 0 0;
+    height: 58px;
+}
+
+/* =========================================
+   6. BUTTONS
+========================================= */
+
+.btn {
+    border: 0;
+    border-radius: 12px;
+    padding: 11px 16px;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform .15s, box-shadow .15s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px #6d56851c;
+}
+
+.btn.primary {
+    background: var(--purple);
+    color: white;
+}
+
+.btn.light {
+    background: #fff;
+    color: var(--purple-dark);
+    margin-top: 12px;
+}
+
+.btn.outline {
+    background: #fff;
+    border: 1px solid var(--lav2);
+    color: var(--purple-dark);
+    margin-top: 12px;
+}
+
+.btn.danger {
+    background: #fff0f2;
+    color: var(--danger);
+}
+
+.btn.full {
+    width: 100%;
+}
+
+/* =========================================
+   7. SECTIONS AND GRIDS
+========================================= */
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin: 30px 0 14px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+    margin: 0;
+}
+
+.section-heading.compact {
+    margin: 0 0 15px;
+}
+
+.grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.grid-two > .card {
+    margin-bottom: 0;
+}
+
+.reminder-card {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 19px;
+}
+
+.large-icon {
+    font-size: 32px;
+}
+
+.reminder-card p {
+    font-size: 12px;
+    margin: 0 0 5px;
+}
+
+.text-btn {
+    border: 0;
+    background: transparent;
+    color: var(--purple);
+    font-weight: 700;
+    padding: 4px 0;
+    font-size: 12px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.stat-card {
+    padding: 17px;
+}
+
+.stat-card > span {
+    font-size: 21px;
+}
+
+.stat-card p {
+    font-size: 11px;
+    margin: 6px 0 1px;
+}
+
+.stat-card strong {
+    font-size: 13px;
+}
+
+.page-intro {
+    margin: 5px 0 24px;
+}
+
+.page-intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================
+   8. CYCLE AND CALENDAR
+========================================= */
+
+.summary-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--purple);
+    line-height: 1.2;
+    margin: 12px 0 4px;
+}
+
+.summary-number.small {
+    font-size: 34px;
+    margin-top: 22px;
+}
+
+.cycle-summary {
+    margin-bottom: 18px;
+}
+
+.calendar-controls {
+    display: flex;
+    gap: 7px;
+}
+
+.calendar-controls .icon-btn {
+    width: 33px;
+    height: 33px;
+}
+
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 13px 0 18px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.period-dot {
+    background: #bc8db7;
+}
+
+.predicted-dot {
+    background: #ead8e8;
+}
+
+.today-dot {
+    background: var(--purple);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-cell {
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 12px;
+    position: relative;
+    background: #fcfbfd;
+}
+
+.calendar-cell.weekday {
+    background: transparent;
+    color: #a296ad;
+    font-size: 10px;
+    font-weight: 700;
+    min-height: 26px;
+}
+
+.calendar-cell.period {
+    background: #efddec;
+    color: #875f83;
+    font-weight: 700;
+}
+
+.calendar-cell.predicted {
+    background: #f7edf5;
+    color: #9d7a9a;
+    border: 1px dashed #d9b9d3;
+}
+
+.calendar-cell.today {
+    outline: 2px solid var(--purple);
+    outline-offset: -2px;
+    font-weight: 700;
+}
+
+.calendar-cell.empty {
+    background: transparent;
+}
+
+/* =========================================
+   9. FORMS AND INPUTS
+========================================= */
+
+.form-stack {
+    display: grid;
+    gap: 13px;
+    margin-top: 16px;
+}
+
+label {
+    display: grid;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #71647c;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid #e9e1ee;
+    background: #fdfcfe;
+    border-radius: 10px;
+    padding: 11px 12px;
+    color: var(--text);
+    outline: none;
+    font-size: 13px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #b69bcf;
+    box-shadow: 0 0 0 3px #e9def366;
+}
+
+textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.inline-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inline-value input {
+    max-width: 90px;
+}
+
+.field-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #71647c;
+}
+
+/* =========================================
+   10. HISTORY AND JOURNAL
+========================================= */
+
+.history-list,
+.journal-list {
+    display: grid;
+    gap: 9px;
+    margin-top: 17px;
+}
+
+.history-item,
+.journal-item {
+    background: #faf7fc;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.history-item strong,
+.journal-item strong {
+    font-size: 12px;
+}
+
+.history-item small,
+.journal-item small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.delete-entry {
+    border: 0;
+    background: transparent;
+    color: #b48ca8;
+    font-size: 17px;
+    padding: 5px;
+}
+
+/* =========================================
+   11. SYMPTOMS AND MOOD
+========================================= */
+
+.chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.choice-chip {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 30px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: #82768c;
+}
+
+.choice-chip.selected {
+    background: #eee4f5;
+    border-color: #c9b5dd;
+    color: #71578e;
+    font-weight: 700;
+}
+
+.mood-options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
+}
+
+.mood-option {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    padding: 13px 5px;
+    color: var(--text);
+    display: grid;
+    gap: 5px;
+    justify-items: center;
+}
+
+.mood-option .emoji {
+    font-size: 26px;
+}
+
+.mood-option small {
+    font-size: 10px;
+}
+
+.mood-option.selected {
+    background: #f1e9f7;
+    border-color: #bca5d1;
+    box-shadow: 0 0 0 2px #eee5f5;
+}
+
+.range-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.range-row input {
+    padding: 0;
+    accent-color: var(--purple);
+}
+
+.range-row output {
+    min-width: 45px;
+    color: var(--purple);
+    font-weight: 700;
+}
+
+.mood-history {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+}
+
+.mood-record {
+    background: #faf7fc;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.mood-record .emoji {
+    font-size: 25px;
+}
+
+.mood-record strong {
+    font-size: 12px;
+}
+
+.mood-record small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* =========================================
+   12. SELF CARE
+========================================= */
+
+.check-list {
+    display: grid;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.check-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #faf7fc;
+    border-radius: 11px;
+    padding: 10px 12px;
+    font-size: 12px;
+}
+
+.check-row input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--purple);
+}
+
+.check-row.done span {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.inline-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.inline-form input {
+    min-width: 0;
+}
+
+.inline-form .btn {
+    white-space: nowrap;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+/* =========================================
+   13. WATER TRACKER
+========================================= */
+
+.water-count {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.water-count strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--purple);
+}
+
+.water-count span {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.water-progress {
+    height: 10px;
+    border-radius: 20px;
+    background: #f0eaf4;
+    overflow: hidden;
+    margin-bottom: 17px;
+}
+
+.water-progress div {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #b9a0d1, #8e72b1);
+    border-radius: 20px;
+    transition: width .3s;
+}
+
+.button-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.small-label {
+    margin-top: 17px;
+}
+
+/* =========================================
+   14. BREATHING EXERCISE
+========================================= */
+
+.breathing-wrap {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    padding: 15px;
+}
+
+.breath-circle {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f8effa, #e4d5ef);
+    display: grid;
+    place-items: center;
+    color: var(--purple-dark);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    box-shadow: 0 0 0 12px #f8f3fa;
+    transition: transform 4s ease-in-out;
+}
+
+.breath-circle.breathe {
+    transform: scale(1.18);
+}
+
+/* =========================================
+   15. LEARNING LIBRARY
+========================================= */
+
+.library-tools {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.article-card {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 17px;
+    padding: 19px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    min-height: 185px;
+}
+
+.article-card .article-icon {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.article-card .eyebrow {
+    margin-bottom: 7px;
+}
+
+.article-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+}
+
+.article-card p {
+    font-size: 12px;
+    color: var(--muted);
+    flex: 1;
+}
+
+.article-card button {
+    align-self: flex-start;
+}
+
+/* =========================================
+   16. SETTINGS
+========================================= */
+
+.button-stack {
+    display: grid;
+    gap: 9px;
+    margin-top: 14px;
+}
+
+.file-label {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.file-label input {
+    display: none;
+}
+
+.setting-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 22px 0;
+}
+
+/* =========================================
+   17. FOOTER AND MOBILE NAV
+========================================= */
+
+.footer {
+    text-align: center;
+    color: #b0a4b8;
+    font-size: 11px;
+    padding: 40px 0 10px;
+}
+
+.footer span {
+    padding: 0 6px;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+/* =========================================
+   18. TOAST
+========================================= */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    background: #5f4d70;
+    color: #fff;
+    padding: 11px 18px;
+    border-radius: 30px;
+    font-size: 12px;
+    z-index: 2000;
+    transition: .25s;
+    pointer-events: none;
+    max-width: 90vw;
+    text-align: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* =========================================
+   19. LOCK SCREEN
+========================================= */
+
+.lock-screen {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: linear-gradient(145deg, #f6f0fa, #fff7f5);
+}
+
+.lock-card {
+    width: min(100%, 380px);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.lock-brand {
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.lock-card h1 {
+    font-size: 29px;
+}
+
+.lock-card form {
+    display: grid;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.error-text {
+    color: var(--danger);
+    font-size: 12px;
+    min-height: 18px;
+}
+
+/* =========================================
+   20. MODALS
+========================================= */
+
+.modal {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: min(94vw, 470px);
+    width: 100%;
+    max-height: 88vh;
+}
+
+.modal::backdrop {
+    background: #382d4380;
+    backdrop-filter: blur(4px);
+}
+
+.modal-card {
+    position: relative;
+    background: #fff;
+    border-radius: 22px;
+    padding: 28px;
+    max-height: 88vh;
+    overflow: auto;
+    box-shadow: var(--shadow);
+}
+
+.modal-card label {
+    margin: 12px 0;
+}
+
+.modal-close {
+    position: absolute;
+    right: 17px;
+    top: 12px;
+    border: 0;
+    background: #f6f1f8;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: var(--purple);
+    font-size: 20px;
+}
+
+.article-modal {
+    max-width: min(94vw, 650px);
+}
+
+.article-content h2 {
+    font-size: 29px;
+}
+
+.article-content p,
+.article-content li {
+    font-size: 14px;
+    color: #756a80;
+    line-height: 1.8;
+}
+
+.article-content h3 {
+    margin-top: 20px;
+}
+
+/* =========================================
+   21. TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        margin-left: 210px;
+        padding: 25px 24px;
+    }
+
+    .article-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================
+   22. MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .main-content {
+        margin: 0;
+        padding: 18px 16px 100px;
+        max-width: 100%;
+    }
+
+    .topbar {
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+    }
+
+    .mobile-menu {
+        display: grid;
+    }
+
+    .topbar > div {
+        margin-right: auto;
+        margin-left: 12px;
+    }
+
+    .top-title {
+        font-size: 20px;
+    }
+
+    .welcome-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .welcome-row h1 {
+        font-size: 32px;
+    }
+
+    .date-pill {
+        font-size: 11px;
+    }
+
+    .hero-grid,
+    .grid-two {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 19px;
+        border-radius: 19px;
+    }
+
+    .hero-number {
+        font-size: 45px;
+    }
+
+    .section-heading {
+        margin-top: 25px;
+    }
+
+    .stats-grid {
+        gap: 9px;
+    }
+
+    .stat-card {
+        padding: 13px;
+    }
+
+    .cycle-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .summary-number {
+        font-size: 38px;
+    }
+
+    .summary-number.small {
+        font-size: 25px;
+    }
+
+    .calendar-cell {
+        min-height: 39px;
+        font-size: 11px;
+        border-radius: 9px;
+    }
+
+    .calendar-grid {
+        gap: 4px;
+    }
+
+    .mood-options {
+        gap: 5px;
+    }
+
+    .mood-option {
+        padding: 10px 2px;
+    }
+
+    .mood-option .emoji {
+        font-size: 22px;
+    }
+
+    .mood-option small {
+        font-size: 9px;
+    }
+
+    .mood-history {
+        grid-template-columns: 1fr;
+    }
+
+    .article-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .library-tools {
+        grid-template-columns: 1fr;
+    }
+
+    /* Bottom navigation */
+
+    .mobile-nav {
+        position: fixed;
+        display: flex;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        background: #fff;
+        border-top: 1px solid var(--line);
+        padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+        justify-content: space-around;
+        box-shadow: 0 -5px 20px #56416d0c;
+    }
+
+    .mobile-nav button {
+        border: 0;
+        background: transparent;
+        color: #9b8da6;
+        display: grid;
+        justify-items: center;
+        gap: 2px;
+        min-width: 52px;
+        padding: 3px;
+        flex: 1;
+    }
+
+    .mobile-nav button span {
+        font-size: 20px;
+    }
+
+    .mobile-nav button small {
+        font-size: 9px;
+    }
+
+    .mobile-nav button.active {
+        color: var(--purple-dark);
+        font-weight: 700;
+    }
+
+    .footer {
+        padding-bottom: 15px;
+    }
+
+    .modal-card {
+        padding: 24px 20px;
+    }
+
+    .reminder-card {
+        padding: 17px;
+    }
+
+    .lock-card {
+        padding: 28px 22px;
+    }
+}
+
+/* =========================================
+   23. MOBILE SIDEBAR DRAWER
+========================================= */
+
+/* Hidden backdrop on desktop */
+.menu-backdrop {
+    display: none;
+}
+
+@media (max-width: 650px) {
+
+    /*
+       Sidebar drawer:
+       It slides in from the left.
+       Its content starts below the hamburger area.
+    */
+
+    .sidebar {
+        display: flex !important;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        width: min(84vw, 310px);
+        height: 100vh;
+        height: 100dvh;
+
+        padding:
+            calc(150px + env(safe-area-inset-top))
+            18px
+            calc(20px + env(safe-area-inset-bottom));
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+
+        background: #f3edf8;
+
+        transform: translateX(-105%);
+        transition: transform .28s ease;
+
+        z-index: 1001;
+
+        box-shadow: 12px 0 35px rgba(55, 38, 72, .12);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar > .brand {
+        margin-top: 0;
+    }
+
+    .side-tagline {
+        margin-bottom: 24px;
+    }
+
+    .side-nav {
+        gap: 5px;
+    }
+
+    .nav-item {
+        padding: 13px 14px;
+        min-height: 46px;
+    }
+
+    .sidebar-bottom {
+        padding-top: 20px;
+    }
+
+    /*
+       Dark overlay behind the sidebar.
+    */
+
+    .menu-backdrop {
+        display: block;
+
+        position: fixed;
+        inset: 0;
+
+        border: 0;
+        padding: 0;
+
+        background: rgba(35, 25, 45, .38);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            opacity .28s ease,
+            visibility .28s ease;
+
+        z-index: 1000;
+    }
+
+    .menu-backdrop.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /*
+       Hamburger remains visible above the sidebar.
+    */
+
+    .mobile-menu {
+        display: grid !important;
+
+        position: relative;
+        z-index: 1002;
+
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+
+        background: #fff;
+        color: var(--purple);
+    }
+
+    /*
+       Keep the bottom navigation below the drawer.
+    */
+
+    .mobile-nav {
+        z-index: 30;
+    }
+
+    .mobile-nav button {
+        flex: 1;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /*
+       Keyboard focus visibility.
+    */
+
+    .mobile-nav button:focus-visible,
+    .mobile-menu:focus-visible,
+    .nav-item:focus-visible {
+        outline: 2px solid var(--purple);
+        outline-offset: 2px;
+    }
+
+    /* Dark mode drawer */
+    body.dark .sidebar {
+        background: #2b2333;
+    }
+
+    body.dark .mobile-menu {
+        background: #352c40;
+        color: #e0ccec;
+        border-color: var(--line);
+    }
+
+    body.dark .menu-backdrop {
+        background: rgba(0, 0, 0, .55);
+    }
+}
+
+/* =========================================
+   24. DARK THEME
+========================================= */
+
+body.dark {
+    --bg: #211c29;
+    --surface: #2d2636;
+    --surface2: #392e46;
+    --lav: #493a57;
+    --lav2: #665078;
+    --purple: #c2a5dc;
+    --purple-dark: #e0ccec;
+    --text: #eee6f3;
+    --muted: #b6a9c0;
+    --line: #45394f;
+    --pink: #493542;
+    --shadow: 0 10px 32px #0002;
+}
+
+body.dark .sidebar {
+    background: #2b2333;
+}
+
+body.dark .nav-item {
+    color: #c1b3cc;
+}
+
+body.dark .nav-item.active,
+body.dark .nav-item:hover,
+body.dark .card,
+body.dark .article-card,
+body.dark .modal-card,
+body.dark .lock-card {
+    background: var(--surface);
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea,
+body.dark .avatar,
+body.dark .icon-btn,
 body.dark .history-item,
 body.dark .journal-item,
 body.dark .mood-record,
@@ -94,14 +1661,4 @@ body.dark .water-progress {
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
-}
-
-/* =========================================
-   26. SPACING BETWEEN GRID AND FOLLOWING CARDS
-========================================= */
-
-#page-cycle > .grid-two + .card,
-#page-wellness > .grid-two + .card,
-#page-settings > .grid-two + .card {
-    margin-top: 18px;
 }
