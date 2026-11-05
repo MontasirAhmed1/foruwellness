@@ -1,6 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
+/* =========================================
+   1. VARIABLES AND RESET
+========================================= */
+
 :root {
     --bg: #faf8fc;
     --surface: #fff;
@@ -59,6 +63,10 @@ a {
 .app-shell {
     min-height: 100vh;
 }
+
+/* =========================================
+   2. DESKTOP SIDEBAR
+========================================= */
 
 .sidebar {
     width: 245px;
@@ -138,6 +146,10 @@ a {
     color: var(--muted);
 }
 
+/* =========================================
+   3. MAIN CONTENT AND TOPBAR
+========================================= */
+
 .main-content {
     margin-left: 245px;
     max-width: 1500px;
@@ -151,20 +163,6 @@ a {
     border-bottom: 1px solid var(--line);
     padding-bottom: 18px;
     margin-bottom: 34px;
-}
-
-.eyebrow {
-    font-size: 10px;
-    letter-spacing: 1.65px;
-    font-weight: 700;
-    color: #a18eae;
-    margin: 0 0 5px;
-}
-
-.top-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 23px;
-    color: var(--purple-dark);
 }
 
 .avatar,
@@ -205,6 +203,10 @@ a {
     }
 }
 
+/* =========================================
+   4. TYPOGRAPHY
+========================================= */
+
 h1,
 h2,
 h3,
@@ -235,6 +237,24 @@ h3 {
     font-size: 16px;
     margin-bottom: 5px;
 }
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.65px;
+    font-weight: 700;
+    color: #a18eae;
+    margin: 0 0 5px;
+}
+
+.top-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    color: var(--purple-dark);
+}
+
+/* =========================================
+   5. HOME PAGE
+========================================= */
 
 .welcome-row {
     display: flex;
@@ -325,6 +345,10 @@ h3 {
     height: 58px;
 }
 
+/* =========================================
+   6. BUTTONS
+========================================= */
+
 .btn {
     border: 0;
     border-radius: 12px;
@@ -369,6 +393,10 @@ h3 {
 .btn.full {
     width: 100%;
 }
+
+/* =========================================
+   7. SECTIONS AND GRIDS
+========================================= */
 
 .section-heading {
     display: flex;
@@ -451,6 +479,10 @@ h3 {
 .page-intro p:last-child {
     margin-bottom: 0;
 }
+
+/* =========================================
+   8. CYCLE AND CALENDAR
+========================================= */
 
 .summary-number {
     font-family: 'Playfair Display', serif;
@@ -559,6 +591,10 @@ h3 {
     background: transparent;
 }
 
+/* =========================================
+   9. FORMS AND INPUTS
+========================================= */
+
 .form-stack {
     display: grid;
     gap: 13px;
@@ -614,6 +650,10 @@ textarea {
     color: #71647c;
 }
 
+/* =========================================
+   10. HISTORY AND JOURNAL
+========================================= */
+
 .history-list,
 .journal-list {
     display: grid;
@@ -651,6 +691,10 @@ textarea {
     font-size: 17px;
     padding: 5px;
 }
+
+/* =========================================
+   11. SYMPTOMS AND MOOD
+========================================= */
 
 .chip-grid {
     display: flex;
@@ -751,6 +795,10 @@ textarea {
     font-size: 10px;
 }
 
+/* =========================================
+   12. SELF CARE
+========================================= */
+
 .check-list {
     display: grid;
     gap: 10px;
@@ -796,6 +844,10 @@ textarea {
     font-size: 12px;
 }
 
+/* =========================================
+   13. WATER TRACKER
+========================================= */
+
 .water-count {
     display: flex;
     align-items: baseline;
@@ -840,6 +892,10 @@ textarea {
     margin-top: 17px;
 }
 
+/* =========================================
+   14. BREATHING EXERCISE
+========================================= */
+
 .breathing-wrap {
     display: grid;
     justify-items: center;
@@ -864,6 +920,10 @@ textarea {
 .breath-circle.breathe {
     transform: scale(1.18);
 }
+
+/* =========================================
+   15. LEARNING LIBRARY
+========================================= */
 
 .library-tools {
     display: grid;
@@ -913,6 +973,10 @@ textarea {
     align-self: flex-start;
 }
 
+/* =========================================
+   16. SETTINGS
+========================================= */
+
 .button-stack {
     display: grid;
     gap: 9px;
@@ -936,6 +1000,10 @@ textarea {
     margin: 22px 0;
 }
 
+/* =========================================
+   17. FOOTER AND MOBILE NAV
+========================================= */
+
 .footer {
     text-align: center;
     color: #b0a4b8;
@@ -951,6 +1019,10 @@ textarea {
     display: none;
 }
 
+/* =========================================
+   18. TOAST
+========================================= */
+
 .toast {
     position: fixed;
     bottom: 25px;
@@ -962,7 +1034,7 @@ textarea {
     padding: 11px 18px;
     border-radius: 30px;
     font-size: 12px;
-    z-index: 100;
+    z-index: 2000;
     transition: .25s;
     pointer-events: none;
     max-width: 90vw;
@@ -973,6 +1045,10 @@ textarea {
     opacity: 1;
     transform: translate(-50%, 0);
 }
+
+/* =========================================
+   19. LOCK SCREEN
+========================================= */
 
 .lock-screen {
     min-height: 100vh;
@@ -1012,6 +1088,10 @@ textarea {
     font-size: 12px;
     min-height: 18px;
 }
+
+/* =========================================
+   20. MODALS
+========================================= */
 
 .modal {
     border: 0;
@@ -1073,8 +1153,12 @@ textarea {
     margin-top: 20px;
 }
 
-/* TABLET */
+/* =========================================
+   21. TABLET RESPONSIVE
+========================================= */
+
 @media (max-width: 900px) {
+
     .sidebar {
         width: 210px;
     }
@@ -1093,19 +1177,20 @@ textarea {
     }
 }
 
-/* MOBILE */
+/* =========================================
+   22. MOBILE RESPONSIVE
+========================================= */
+
 @media (max-width: 650px) {
+
     body {
         font-size: 14px;
-    }
-
-    .sidebar {
-        display: none;
     }
 
     .main-content {
         margin: 0;
         padding: 18px 16px 100px;
+        max-width: 100%;
     }
 
     .topbar {
@@ -1216,13 +1301,15 @@ textarea {
         grid-template-columns: 1fr;
     }
 
+    /* Bottom navigation */
+
     .mobile-nav {
         position: fixed;
         display: flex;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 20;
+        z-index: 30;
         background: #fff;
         border-top: 1px solid var(--line);
         padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
@@ -1239,6 +1326,7 @@ textarea {
         gap: 2px;
         min-width: 52px;
         padding: 3px;
+        flex: 1;
     }
 
     .mobile-nav button span {
@@ -1271,7 +1359,176 @@ textarea {
     }
 }
 
-/* DARK THEME */
+/* =========================================
+   23. MOBILE SIDEBAR DRAWER
+========================================= */
+
+/* Hidden backdrop on desktop */
+.menu-backdrop {
+    display: none;
+}
+
+@media (max-width: 650px) {
+
+    /*
+       Sidebar drawer:
+       It slides in from the left.
+       Its content starts below the hamburger area.
+    */
+
+    .sidebar {
+        display: flex !important;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+
+        width: min(84vw, 310px);
+        height: 100vh;
+        height: 100dvh;
+
+        padding:
+            calc(90px + env(safe-area-inset-top))
+            18px
+            calc(20px + env(safe-area-inset-bottom));
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+
+        background: #f3edf8;
+
+        transform: translateX(-105%);
+        transition: transform .28s ease;
+
+        z-index: 1001;
+
+        box-shadow: 12px 0 35px rgba(55, 38, 72, .12);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar > .brand {
+        margin-top: 0;
+    }
+
+    .side-tagline {
+        margin-bottom: 24px;
+    }
+
+    .side-nav {
+        gap: 5px;
+    }
+
+    .nav-item {
+        padding: 13px 14px;
+        min-height: 46px;
+    }
+
+    .sidebar-bottom {
+        padding-top: 20px;
+    }
+
+    /*
+       Dark overlay behind the sidebar.
+    */
+
+    .menu-backdrop {
+        display: block;
+
+        position: fixed;
+        inset: 0;
+
+        border: 0;
+        padding: 0;
+
+        background: rgba(35, 25, 45, .38);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            opacity .28s ease,
+            visibility .28s ease;
+
+        z-index: 1000;
+    }
+
+    .menu-backdrop.visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    /*
+       Hamburger remains visible above the sidebar.
+    */
+
+    .mobile-menu {
+        display: grid !important;
+
+        position: relative;
+        z-index: 1002;
+
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+
+        background: #fff;
+        color: var(--purple);
+    }
+
+    /*
+       Keep the bottom navigation below the drawer.
+    */
+
+    .mobile-nav {
+        z-index: 30;
+    }
+
+    .mobile-nav button {
+        flex: 1;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /*
+       Keyboard focus visibility.
+    */
+
+    .mobile-nav button:focus-visible,
+    .mobile-menu:focus-visible,
+    .nav-item:focus-visible {
+        outline: 2px solid var(--purple);
+        outline-offset: 2px;
+    }
+
+    /* Dark mode drawer */
+    body.dark .sidebar {
+        background: #2b2333;
+    }
+
+    body.dark .mobile-menu {
+        background: #352c40;
+        color: #e0ccec;
+        border-color: var(--line);
+    }
+
+    body.dark .menu-backdrop {
+        background: rgba(0, 0, 0, .55);
+    }
+}
+
+/* =========================================
+   24. DARK THEME
+========================================= */
+
 body.dark {
     --bg: #211c29;
     --surface: #2d2636;
@@ -1360,103 +1617,49 @@ body.dark .predicted {
     color: #e3c6df !important;
 }
 
-/* MOBILE SIDEBAR DRAWER */
-.menu-backdrop {
-    display: none;
+body.dark .choice-chip,
+body.dark .mood-option {
+    background: #352c40;
+    color: var(--text);
+    border-color: var(--line);
 }
 
-@media (max-width: 650px) {
-    .sidebar {
-        display: flex;
-        position: fixed;
-        inset: 0 auto 0 0;
-        width: min(84vw, 310px);
-        height: 100vh;
-        height: 100dvh;
-
-        /* Extra top space for the hamburger button */
-        padding: calc(100px + env(safe-area-inset-top)) 18px calc(20px + env(safe-area-inset-bottom));
-
-        overflow-y: auto;
-        transform: translateX(-105%);
-        transition: transform .25s ease;
-        z-index: 41;
-        box-shadow: 12px 0 35px rgba(55, 38, 72, .12);
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .sidebar > .brand {
-        margin-top: 0;
-    }
-
-    .side-tagline {
-        margin-bottom: 24px;
-    }
-
-    .side-nav {
-        gap: 5px;
-    }
-
-    .nav-item {
-        padding: 13px 14px;
-        min-height: 46px;
-    }
-
-    .sidebar-bottom {
-        padding-top: 20px;
-    }
-
-    .menu-backdrop {
-        display: block;
-        position: fixed;
-        inset: 0;
-        z-index: 40;
-        border: 0;
-        padding: 0;
-        background: rgba(35, 25, 45, .38);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity .25s ease, visibility .25s ease;
-    }
-
-    .menu-backdrop.visible {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .mobile-menu {
-        position: relative;
-        z-index: 42;
-        flex: 0 0 40px;
-    }
-
-    .mobile-nav {
-        z-index: 30;
-    }
-
-    body.menu-open {
-        overflow: hidden;
-    }
-
-    .mobile-nav button {
-        flex: 1;
-    }
-
-    .mobile-nav button:focus-visible,
-    .mobile-menu:focus-visible,
-    .nav-item:focus-visible {
-        outline: 2px solid var(--purple);
-        outline-offset: 2px;
-    }
+body.dark .choice-chip.selected,
+body.dark .mood-option.selected {
+    background: #493a57;
+    border-color: #8b70a6;
 }
 
-/* ACCESSIBILITY */
+body.dark .article-content p,
+body.dark .article-content li {
+    color: #c5b9ce;
+}
+
+body.dark .lock-screen {
+    background: linear-gradient(145deg, #211c29, #302537);
+}
+
+body.dark .modal-close {
+    background: #403448;
+    color: #e0ccec;
+}
+
+body.dark .water-progress {
+    background: #493b52;
+}
+
+/* =========================================
+   25. ACCESSIBILITY
+========================================= */
+
 @media (prefers-reduced-motion: reduce) {
-    .sidebar,
-    .menu-backdrop {
-        transition: none;
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }
