@@ -1,4 +1,4 @@
-```css
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
 :root {
@@ -198,6 +198,7 @@ a {
         opacity: .3;
         transform: translateY(5px);
     }
+
     to {
         opacity: 1;
         transform: none;
@@ -1373,8 +1374,8 @@ body.dark .predicted {
         height: 100vh;
         height: 100dvh;
 
-        /* Extra top space keeps sidebar content below hamburger */
-        padding: calc(85px + env(safe-area-inset-top)) 18px calc(20px + env(safe-area-inset-bottom));
+        /* Extra top space for the hamburger button */
+        padding: calc(100px + env(safe-area-inset-top)) 18px calc(20px + env(safe-area-inset-bottom));
 
         overflow-y: auto;
         transform: translateX(-105%);
@@ -1385,6 +1386,10 @@ body.dark .predicted {
 
     .sidebar.open {
         transform: translateX(0);
+    }
+
+    .sidebar > .brand {
+        margin-top: 0;
     }
 
     .side-tagline {
@@ -1455,4 +1460,3 @@ body.dark .predicted {
         transition: none;
     }
 }
-```
