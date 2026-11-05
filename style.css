@@ -1389,7 +1389,7 @@ textarea {
         height: 100dvh;
 
         padding:
-            calc(90px + env(safe-area-inset-top))
+            calc(150px + env(safe-area-inset-top))
             18px
             calc(20px + env(safe-area-inset-bottom));
 
