@@ -1453,4 +1453,10 @@ body.dark .predicted {
     .menu-backdrop {
         transition: none;
     }
+
+    @media (max-width: 650px) {
+        body.menu-open .mobile-menu {
+            display: none !important;
+        }
+    }
 }
