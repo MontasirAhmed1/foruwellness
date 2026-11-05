@@ -17,17 +17,6 @@ A personal, local-first women's wellness journal built with HTML, CSS and vanill
 - PWA installation and basic offline caching
 - Soft lavender responsive interface and dark theme
 
-## Publish on GitHub Pages
-
-1. Create a new GitHub repository, for example `for-u`.
-2. Upload all files in this folder to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select `main` and `/ (root)`, then save.
-6. Open the published HTTPS URL on the phone.
-7. In the browser menu, choose **Add to Home Screen** or **Install app** if available.
-
-Use the hosted HTTPS site, not a `file://` URL. IndexedDB, service workers, notifications and Web Crypto require a secure context in supported browsers.
 
 ## Important data and notification notes
 
