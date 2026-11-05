@@ -1,0 +1,18 @@
+{
+  "name": "FOR U 🌻 Women's Wellness",
+  "short_name": "FOR U 🌻",
+  "description": "A little space for your body, mind and feelings.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf8fc",
+  "theme_color": "#f5effa",
+  "icons": [
+    {
+      "src": "./sunflower.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
